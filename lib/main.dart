@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
+import './questions.dart';
+import './answer.dart';
+
 void main() {
   runApp(MyFirstApp());
 }
@@ -22,11 +25,27 @@ class _MyFirstAppState extends State<MyFirstApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> questions = [
-      'What\'s your favorite hero?',
-      'What\'s your favourite anime?',
-      'Question 3',
-      'Question 4',
+    var questions = [
+      {
+        'questionText': 'Who dies in the Hound of Baskerville?',
+        'answers': ['Watson', 'Moriarty', 'Sherlock', 'Hound'],
+      },
+      {
+        'questionText': 'Who wrote the book Wuthering Heights?',
+        'answers': ['Harper Lee', 'Emily Bronte'],
+      },
+      {
+        'questionText': 'The Hitchhiker\'s Guide to the _________',
+        'answers': ['Universe', 'Galaxy', 'Planet'],
+      },
+      {
+        'questionText': 'Who is sus?',
+        'answers': ['Killer', 'Imposter', 'You'],
+      },
+      {
+        'questionText': 'Who dies in the Hound of Baskerville?',
+        'answers': ['Watson', 'Moriarty', 'Sherlock'],
+      },
     ];
     return MaterialApp(
       home: Scaffold(
@@ -34,42 +53,12 @@ class _MyFirstAppState extends State<MyFirstApp> {
           title: Text("List"),
         ),
         body: Column(children: [
-          Text(questions[_questionINdex]),
-          ElevatedButton(
-            onPressed: _answerQuestion,
-            child: Text('Answer1'),
-          ),
-          ElevatedButton(
-            onPressed: _answerQuestion,
-            child: Text('Answer2'),
-          ),
+          Question(questions[_questionINdex]['questionText'] as String),
+          ...(questions[_questionINdex]['answers'] as List<String>).map((ans) {
+            return Answer(_answerQuestion, ans);
+          }).toList()
         ]),
       ),
     ); //this is a widget which is a combination of all the widgets you are gonna make, and this is gonna be returned by build method
   }
 }
-
-// class Todo extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         theme: ThemeData(
-//           textTheme: GoogleFonts.nunitoSansTextTheme(
-//             Theme.of(context).textTheme,
-//           ),
-//         ),
-//         home: Scaffold(
-//           appBar: AppBar(
-//             title: Text("Counting App"),
-//           ),
-//           body: Container(
-//             child: Center(
-//               child: Text(
-//                 "hello world!!!!",
-//                 style: TextStyle(fontSize: 50.0),
-//               ),
-//             ),
-//           ),
-//         ));
-//   }
-// }
